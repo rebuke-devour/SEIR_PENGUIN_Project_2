@@ -1,0 +1,29 @@
+{% comment %} {% layout "layout.liquid" %}
+{% block content %}
+
+<div>
+
+ <form action="/keymaster/{{ password._id }}?_method=PUT" method="post">
+  <fieldset>
+    <legend>Edit {{ password.acctName }}</legend>
+        <label>
+            Account Name: <input type="text" name="name" placeholder="Account Userame" value="{{password.acctName}}"/>
+        </label>
+        <label>
+            Password: <input type="text" name="color" placeholder="Account Password" value="{{password.password}}"/>
+        </label>
+        <label>
+            Ready to Eat: <input type="checkbox" name="readyToEat"
+            {% if fruit.readyToEat == true %}
+            checked
+            {% endif %}
+            >
+        </label>
+    </fieldset>
+    <input type="submit" value="update {{fruit.name}}"/>
+ </form>
+
+</div>
+
+
+{% endblock %} {% endcomment %}
