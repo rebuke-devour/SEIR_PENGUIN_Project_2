@@ -1,0 +1,12 @@
+{% layout "layout.liquid" %} {% block content %}
+      <div>
+        <article>
+
+          <a href="/passwords/{{ password._id }}/edit"><button>Edit</button></a>
+          <form action="/password/{{ password._id }}?_method=DELETE" method="POST">
+            <input type="submit" value="Delete" />
+          </form>
+          <a href="/passwords/"><button>Back to Main</button></a>
+        </article>
+      </div>
+{% endblock %}

@@ -1,14 +1,15 @@
-const mongoose = require('./connection')
-const db = mongoose.connection
+const { Schema, model } = require('mongoose')
 
-db.on ('open', ()=> {
-const passwordSchema = new Schema= [
-    { acctName: String, required: true},
-    { password: String, required: true},
-]
-passwordSchema.deleteMany(startPasswords).then((data)=>{
-    console.log(data)
-    db.close()
-})
+
+
+
+const passwordSchema = new Schema({
+     acctName: {type: String, required: true, default: false},
+     password: {type: String, required: true, default: false},
 
 })
+
+
+const Passwords = model('Passwords', passwordSchema)
+
+model.exports = Password

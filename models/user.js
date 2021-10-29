@@ -1,8 +1,8 @@
 ///////////////////////////////////
 // import dependencies
 ///////////////////////////////////
-// import the existing connected mongoose object from connection.js
-const mongoose = require("./connection")
+// // import the existing connected mongoose object from connection.js
+// const mongoose = require("./connection")
 
 ///////////////////////////////////////////
 // Create our User Model
