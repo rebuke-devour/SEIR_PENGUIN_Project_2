@@ -45,7 +45,14 @@
       <h1> KeyMaster </h1>
     </header>
 
-    <main>{% block content %}My default content{% endblock %}</main>
+    <main>{% block content %}
+
+    <div>
+    <a href="/user/signup"><button>Signup</button></a>
+    <a href="/user/login"><button>Login</button></a>
+    </div>
+
+    {% endblock %}</main>
 
     <footer></footer>
   </body>

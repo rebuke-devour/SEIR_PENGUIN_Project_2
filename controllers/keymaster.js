@@ -1,45 +1,97 @@
-// const mongoose = require('./connection')
-// const db = mongoose.connection
 
-// db.on ('open', ()=> {
-// const passwordSchema = new Schema= [
-//     { acctName: String, required: true},
-//     { password: String, required: true},
-// ]
-// passwordSchema.deleteMany(startPasswords).then((data)=>{
-//     console.log(data)
-//     db.close()
-// })
+const express = require('express')
+const Keymaster = require('../models/Passwords.js')
+const router = express.Router()
 
-// })
-// // ========== ROUTES ============= //
+// ============ M I D D L E W A R E ======== //
 
-// // new route
-// router.get("/new", (req, res) => {
-//     res.render("fruits/new.liquid");
-//   });
 
- 
-// // show route
-//   router.get("/:id", (req, res) => {
-//     // get the id from params
-//     const id = req.params.id;
+// ========================================= //
+// index Route
+router.get("/", (req, res) => {
+    Keymaster.find({username: req.session.username})
+    .then((keymaster) => {
+        res.render("keymaster/index.liquid", {keymaster})
+    })
+    .catch((error) => {
+        res.json({error})
+    })
+})
+
+// New Route
+router.get("/new", (req, res) => {
+    res.render("keymaster/new.liquid");
+  });
+
+// Create route
+router.post("/", (req, res) => {
   
-//     // find the particular fruit from the database
-//     Password.findById(id)
-//       .then((password) => {
-//         console.log(password);
-//         // render the template with the data from the database
-//         res.render("keymaster/show.liquid", { password });
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//         res.json({ error });
-//       });
-//   });
+  req.body.username = req.session.username
+
+  Keynmaster.create(req.body)
+    .then((keymaster) => {
+      res.redirect("/keymaster");
+    })
+    .catch((error) => {
+      console.log(error);
+      res.json({ error });
+    });
+});
+
+// Edit Route
+router.get("/:id/edit", (req, res) => {
+  const id = req.params.id;
+
+  Keymaster.findById(id)
+    .then((keymaster) => {
+      res.render("keymaster/edit.liquid", {keymaster});
+    })
+    .catch((error) => {
+      console.log(error);
+      res.json({ error });
+    });
+});
+
+// Update Route
+router.put("/:id", (req, res) => {
+  const id = req.params.id;
+
+  Keymaster.findByIdAndUpdate(id, req.body, { new: true })
+    .then((keymaster) => {
+      res.redirect("/keymaster");
+    })
+    .catch((error) => {
+      console.log(error);
+      res.json({ error });
+    });
+});
+
+//Delete Route
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+
+  Keymaster.findByIdAndRemove(id)
+    .then((keymaster) => {
+      res.redirect("/keymaster");
+    })
+    .catch((error) => {
+      console.log(error);
+      res.json({ error });
+    });
+});
+
+// show route - get - /passwords/:id
+router.get("/:id", (req, res) => {
+    const id = req.params.id;
   
-//   //////////////////////////////////////////
-//   // Export the Router
-//   //////////////////////////////////////////
-//   module.exports = router;
-  
+    Keymaster.findById(id)
+      .then((keymaster) => {
+        res.render("keymaster/show.liquid", {keymaster});
+      })
+      .catch((error) => {
+        console.log(error);
+        res.json({ error });
+      });
+  });
+
+  module.exports = router
