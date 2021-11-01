@@ -1,0 +1,21 @@
+{% layout "layout.liquid" %} {% block content %}
+<div>
+  <form action="/passwords" method="post">
+    <fieldset>
+      <legend>Enter your credentials</legend>
+     
+      <label>
+        Account Name:<input type="text" name="Account Name" placeholder="" />
+      </label>
+      <label>
+        User Name:<input type="text" name="User Name" placeholder="username@service" />
+      </label>
+        <label>
+        Password:<input type="text" name="Password" placeholder="Password" />
+      </label>
+      <label> READY TO EAT:<input type="checkbox" name="readyToEat" /> </label>
+    </fieldset>
+    <input type="submit" value="Save" />
+  </form>
+</div>
+{% endblock %}

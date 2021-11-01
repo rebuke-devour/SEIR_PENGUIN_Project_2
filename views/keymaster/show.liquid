@@ -1,7 +1,8 @@
 {% layout "layout.liquid" %} {% block content %}
       <div>
         <article>
-
+            <h2>show.liquid
+            {{ passwords.name }} -
           <a href="/passwords/{{ Passwords._id }}/edit"><button>Edit</button></a>
           <form action="/password/{{ Passwords._id }}?_method=DELETE" method="POST">
             <input type="submit" value="Delete" />

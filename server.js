@@ -26,15 +26,33 @@ const app = liquid(express(), {root: viewsFolder})
 // console.log(viewsFolder)
 
 // =============== Establish Connection ================ //
+
+const passwordsSeed = require('./models/seed.js');
+const router = require('./controllers/user.js')
+
+
+const mongoURI = process.env.DATABASE_URL;
+const db = mongoose.connection;
+
 const DATABASE_URL = process.env.DATABASE_URL;
 const CONFIG = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
+// Connect to Mongo
+mongoose.connect(
+    mongoURI,
+    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
+    () => {
+      console.log("The connection with mongod is established");
+    }
+  );
 
-// Establish Connection
-// node 
+mongoose.Promise = global.Promise;
+mongoose.connect ( mongoURI ,
+  () => console.log( 'Mongo running at' , mongoURI )
+);
 
 mongoose.connection
 .on("open", () => console.log("Connected to Mongoose"))
@@ -43,11 +61,11 @@ mongoose.connection
 
 //=================================//
 //seed route - seed our starter data
-app.get("/seed", (req, res) => {
+app.get("/passwordsSeed", (req, res) => {
     // array of starter fruits
     const startPasswords = [
-        { acctName: "Twitter", passwordKey: "password123" },
-        { acctName: "Facebook", passwordKey: "Passwords00" }
+        { acctName: "Twitter",userName:'username@Twitter', passwordKey: "password123" },
+        { acctName: "Facebook",userName:'username@Facebook', passwordKey: "Passwords00" }
    
       ];
 
@@ -78,12 +96,31 @@ app.use(session({
     saveUninitialized: true,
 }))
 
+
+
+// ================ SEED DATA =================//
+router.get('/seed', (req,res)=> {
+Passwords.create(passwordsSeed, ( err , data ) => {
+  if ( err ) console.log ( err.message )
+  
+  })
+})
+
+
+Passwords.create(passwordsSeed, ( err , data ) => {
+    if ( err ) console.log ( err.message )
+      console.log( data )
+    }
+);
+
+
+
 ///////////////////////////////
 //       R O U T I N G     //
 //////////////////////////////
-// app.get('/passwords',(req,res)=>{
-//     res.send("App Working")
-// })
+app.get('/',(req,res)=>{
+    res.render('index.liquid')
+})
 
 
 // Passwords Routing

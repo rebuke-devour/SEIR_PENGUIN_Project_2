@@ -2,21 +2,19 @@
 {% block content %}
 
 <div>
-
- <form action="/keymaster/{{ keymaster._id }}?_method=PUT" method="post">
-  <fieldset>
-    <legend>Edit {{ keymaster.acctName }}</legend>
+      <legend>Enter your credentials</legend>
+     
+      <label>
+        Account Name:<input type="text" name="Account Name" placeholder="" />
+      </label>
+      <label>
+        User Name:<input type="text" name="User Name" placeholder="username@service" />
+      </label>
         <label>
-            Account Name: <input type="text" name="name" placeholder="Account Userame" value="{{keymaster.acctName}}"/>
-        </label>
-        <label>
-            Password: <input type="text" name="color" placeholder="Account Password" value="{{keymaster.password}}"/>
-        </label>
-
+        Password:<input type="text" name="Password" placeholder="Password" />
+      </label>
+      <label> READY TO EAT:<input type="checkbox" name="readyToEat" /> </label>
     </fieldset>
-    <input type="submit" value="update {{keymaster.acctName}}"/>
- </form>
-
 </div>
 
 

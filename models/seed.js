@@ -1,15 +1,17 @@
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
-const mongoose = require('mongoose')
+const mongoose = require('./connection.js')
+const Passwords = require('./Passwords.js')
+const router = express.Router()
 
-
+const db = mongoose.connnection
 //seed route - seed our starter data
-app.get("/seed", (req, res) => {
+router.get("/Seed", (req, res) => {
 
     const startPasswords = [
-        { acctName: "Twitter", passwordKey: "password123" },
-        { acctName: "Facebook", passwordKey: "Passwords00" }
+        { acctName: "Twitter",userName:'username@Twitter', passwordKey: "password123" },
+        { acctName: "Facebook",userName:'username@Facebook', passwordKey: "Passwords00" }
    
       ];
 
@@ -22,3 +24,5 @@ app.get("/seed", (req, res) => {
         })
     })
 })
+
+module.exports = Passwords

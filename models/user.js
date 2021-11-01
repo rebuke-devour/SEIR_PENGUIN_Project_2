@@ -19,7 +19,6 @@ const userSchema = new Schema({
 // Make the User Model
 const User = model("User", userSchema)
 
-
 ///////////////////////////////////////
 //export the User model
 ///////////////////////////////////////

@@ -13,6 +13,7 @@ const {Schema, model}= mongoose
 
 const passwordSchema = new Schema({
      acctName: {type: String, required: true, default: false},
+     userName: {type: String, Required: true, default: false},
      passwordKey: {type: String, required: true, default: false},
     
 })

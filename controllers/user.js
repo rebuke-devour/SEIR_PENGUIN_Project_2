@@ -19,9 +19,10 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res) => {
     req.body.password = await bcrypt.hash(req.body.password, await bcrypt.genSalt(10))
 
+//Save User
     User.create(req.body)
     .then((user) => {
-        console.log(user)
+        console.log(user) 
         res.redirect("/user/login")
     })
     .catch((error) => {
@@ -37,7 +38,7 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
     const {username, password} = req.body
-
+//Search for user
     User.findOne({username})
     .then(async (user) => {
         if(user){

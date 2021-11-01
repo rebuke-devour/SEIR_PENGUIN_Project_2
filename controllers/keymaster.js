@@ -4,7 +4,16 @@ const Keymaster = require('../models/Passwords.js')
 const router = express.Router()
 
 // ============ M I D D L E W A R E ======== //
-
+// middleware to check if user is logged in
+router.use((req, res, next) => {
+    // check if logged in
+    if (req.session.loggedIn){
+        // send to routes
+        next()
+    } else {
+        res.redirect("/user/login")
+    }
+  })
 
 // ========================================= //
 // index Route

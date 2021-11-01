@@ -1,6 +1,30 @@
-{% layout "layout.liquid" %} {% block content %}
+{% layout "layout.liquid" %}
+{% block content %}
+
 <div>
-  <a href="/user/signup"><button>Signup</button></a>
-  <a href="/user/login"><button>Login</button></a>
+<a href="/user/logout"><button>Logout</button></a>
+ <a href="/keymaster/new"><button>Send </button></a
+            {% for fruit in fruits %}
+                 <article>
+        
+            <a href="/passwords/{{ Passwords._id }}">
+            <h2>
+            {{fruit.name}} - 
+                {% if fruit.readyToEat == true %}
+                     Ripe
+                {% else %}
+                    Not Ripe
+                {% endif %}
+
+            </h2>
+        </a>
+
+                </article>
+                          
+
+{% endfor %}
+
+
 </div>
+
 {% endblock %}
