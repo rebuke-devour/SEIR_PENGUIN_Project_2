@@ -1,11 +1,19 @@
 const express = require('express')
 const User =require('../models/user.js')
 const bcrypt = require('bcrypt')
-
+const morgan = require('morgan')
+const methodOverride = require('method-override')
 
 const Passwords = require('../models/Passwords.js')
 
 const router = express.Router()
+
+// ============= M I D D L W A R E =============== //
+router.use(morgan("tiny")); //logging
+router.use(methodOverride("_method")); // override for put and delete requests from forms
+router.use(express.urlencoded({ extended: true })); // parse urlencoded request bodies
+router.use(express.static("public")); // serve files from public statically
+
 
 ////////////////////
 // Routes
@@ -63,7 +71,7 @@ router.post("/login", async (req, res) => {
 //Logout
 router.get("/logout", (req, res) => {
     req.session.destroy((err) => {
-        res.redirect("/")
+        res.redirect("/keymaster")
     })
 })
 

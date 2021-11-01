@@ -3,17 +3,16 @@
 
 <div>
 <a href="/user/logout"><button>Logout</button></a>
- <a href="/keymaster/new"><button>Send </button></a
-            {% for fruit in fruits %}
+ <a href="/keymaster/new"><button>Send </button></a>
+            {% for passwords in keymaster %}
                  <article>
         
-            <a href="/passwords/{{ Passwords._id }}">
+            <a href="/keymaster/{{ passwords._id }}">
             <h2>
-            {{fruit.name}} - 
-                {% if fruit.readyToEat == true %}
-                     Ripe
-                {% else %}
-                    Not Ripe
+            {{passwords.acctName}} - 
+                {% if passwords.saved == true %}
+                     Saved
+              
                 {% endif %}
 
             </h2>
@@ -25,6 +24,5 @@
 {% endfor %}
 
 
-</div>
 
 {% endblock %}

@@ -1,13 +1,13 @@
 {% layout "layout.liquid" %} {% block content %}
       <div>
         <article>
-            <h2>show.liquid
-            {{ passwords.name }} -
-          <a href="/passwords/{{ Passwords._id }}/edit"><button>Edit</button></a>
-          <form action="/password/{{ Passwords._id }}?_method=DELETE" method="POST">
+            <h2>{{passwords.acctName}}</h2>
+            {{ passwords.userName }} - {{ passwords.passwordKey}}
+          <a href="/keymaster/{{ passwords._id }}/edit"><button>Edit</button></a>
+          <form action="/keymaster/{{ passwords._id }}?_method=DELETE" method="POST">
             <input type="submit" value="Delete" />
           </form>
-          <a href="/passwords/"><button>Back to Main</button></a>
+          <a href="/keymaster/"><button>Back to Main</button></a>
         </article>
       </div>
 {% endblock %}

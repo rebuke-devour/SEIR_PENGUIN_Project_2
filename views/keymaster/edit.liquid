@@ -5,16 +5,17 @@
       <legend>Enter your credentials</legend>
      
       <label>
-        Account Name:<input type="text" name="Account Name" placeholder="" />
+        Account Name:<input type="text" name="acctName" placeholder="Your Account" />
       </label>
       <label>
-        User Name:<input type="text" name="User Name" placeholder="username@service" />
+        User Name:<input type="text" name="userName" placeholder="username@service" />
       </label>
         <label>
-        Password:<input type="text" name="Password" placeholder="Password" />
-      </label>
-      <label> READY TO EAT:<input type="checkbox" name="readyToEat" /> </label>
+        Password:<input type="text" name="passwordKey" placeholder="Password" />
+      
     </fieldset>
+      <input type="submit" value="Save" />
+      <form action="/keymaster/{{ passwords._id }}?_method=DELETE" method="POST">
 </div>
 
 

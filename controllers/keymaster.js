@@ -36,8 +36,10 @@ router.get("/new", (req, res) => {
 router.post("/", (req, res) => {
   
   req.body.username = req.session.username
+  req.body.saved = req.body.saved === "on" ? true : false
 
-  Keynmaster.create(req.body)
+
+  Keymaster.create(req.body)
     .then((keymaster) => {
       res.redirect("/keymaster");
     })
@@ -95,7 +97,7 @@ router.get("/:id", (req, res) => {
   
     Keymaster.findById(id)
       .then((keymaster) => {
-        res.render("keymaster/show.liquid", {keymaster});
+        res.render("keymaster/show.liquid", {passwords: keymaster});
       })
       .catch((error) => {
         console.log(error);
