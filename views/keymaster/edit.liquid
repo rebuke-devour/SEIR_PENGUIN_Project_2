@@ -2,8 +2,9 @@
 {% block content %}
 
 <div>
-      <legend>Enter your credentials</legend>
-     
+      <legend>Edit your credentials{{ passwords.acctName }}</legend>
+    <form action="/keymaster/{{ passwords._id }}/edit?_method=PUT" method="post"> 
+      <label>
       <label>
         Account Name:<input type="text" name="acctName" placeholder="Your Account" />
       </label>
@@ -15,7 +16,8 @@
       
     </fieldset>
       <input type="submit" value="Save" />
-      <form action="/keymaster/{{ passwords._id }}?_method=DELETE" method="POST">
+       <a href="/keymaster/{{ passwords._id }}">
+     <input type="submit" value="update {{passwords.acctName}}"/>
 </div>
 
 
