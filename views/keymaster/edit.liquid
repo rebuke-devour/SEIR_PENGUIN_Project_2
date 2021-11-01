@@ -3,7 +3,7 @@
 
 <div>
       <legend>Edit your credentials{{ passwords.acctName }}</legend>
-    <form action="/keymaster/{{ passwords._id }}/edit?_method=PUT" method="post"> 
+    <form action="/keymaster/{{ passwords.id }}?_method=PUT" method="post"> 
       <label>
       <label>
         Account Name:<input type="text" name="acctName" placeholder="Your Account" />

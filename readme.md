@@ -19,7 +19,7 @@ Thus, the desired outcome for this application is to provide the user with secur
 
 - Vault Storage: The ability to store and encrypt passwords,(Working to include notes as well).
 
-## Value Propesition
+## Value Proposition
 
 - For those who are concerned with the security of their login information, this application provides Secure Password storage with encryption.
 
@@ -29,7 +29,7 @@ To meet Minimum Viable Product, this application will provide:
 - Full CRUD functionality to its data model.
 - Follow RESTful conventions 
 - Responsive Styling
-- Use of the following: Modal, Carousel, and/or sandwhich menu (using jQuery or Plain vanillaJS)
+- Use of the following: Modal, Carousel, and/or sandwich menu (using jQuery or Plain vanillaJS)
 
 - This Application will be deployed to Heroku
 
