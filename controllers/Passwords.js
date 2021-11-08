@@ -1,5 +1,6 @@
 const express = require('express')
 const Passwords = require('./models/Passwords')
+const keymaster = require('../user.js')
 
 /////////////////////////////////////////
 // Create Route
@@ -17,25 +18,24 @@ router.use((req, res, next) => {
     res.redirect("/user/login");
   }
 });
+
 router.get('/seed', (req,res)=>{
 
 const passwordSchema = new Schema({
     acctName: {type: String, required: true, default: false},
     userName: {type: String, Required: true, default: false},
-    passwordKey: {type: String, required: true, default: false},
-   
+    passwordKey: {type: String, required: true, default: false},  
+})
 })
 
-})
 
-
-// index route - get - /fruits
+// index route - get - /keymaster
 router.get("/", (req, res) => {
-    //find all the fruits
+    //find all the login info
     Passwords.find({username: req.session.username})
-    .then((fruits) => {
-        // render the index template with the fruits
-        res.render("keymaster/index.liquid", {fruits})
+    .then((passwords) => {
+        // render the index template with passwords
+        res.render("keymaster/index.liquid", {passwords})
     })
     // error handling
     .catch((error) => {
@@ -43,63 +43,64 @@ router.get("/", (req, res) => {
     })
 })
 
-// new route - get request - /fruits/new
+// new route - get request - /keymaster/new
 router.get("/new", (req, res) => {
     res.render("keymaster/new.liquid")
 })
 
-// create - post request - /fruits
+// create - post request - /keymaster
 router.post("/", (req, res) => {
 
     // convert the checkbox property to true or false
     req.body.saved = req.body.saved === "on" ? true : false
-
     // add the username to req.body, to track user
     req.body.username = req.session.username
-
-    // create the new fruit
+    // create new login
     Passwords.create(req.body)
-    .then((fruit) => {
+    .then((passwords) => {
         // redirect the user back to the index route
-        res.redirect("/fruits")
+        res.redirect("/keymaster")
     })
     // error handling
     .catch((error) => {
         res.json({error})
     })
-
 })
 
-// edit route - get request - /fruits/:id/edit
-router.get("/:id/edit", (req, res) => {
+// edit route - get request - /keymaster/:id/edit
+router.get("/keymaster/:id/edit", (req, res) => {
     // get the id from params
     const id = req.params.id
 
-    // get the fruit with the matching id
+    // get the password with the matching id
     Passwords.findById(id)
     .then((passwords) => {
-        // render the edit page template with the fruit data
-        res.render("fruits/edit.liquid", { passwords: keymaster })
+        // render the edit page template with the login data
+        res.render("keymaster/edit.liquid", { passwords: keymaster })
     })
     // error handling
     .catch((error) => {
         res.json({error})
     })
 })
+// Create new passwords
+router.post('/keymaster/:id', )
 
-// update route - put request - "/fruits/:id"
-router.put("/:id", (req, res) => {
+
+
+// update route - put request - "/keymaster/:id"
+router.put("/keymaster/:id", (req, res) => {
     // get the id from params
     const id = req.params.id
     
     // convert the checkbox property to true or false
-    req.body.saved = req.body.readyToEat === "on" ? true : false
+    req.body.saved = req.body.saved === "on" ? true : false
 
     // update the item with the matching id
     Passwords.findByIdAndUpdate(id, req.body, {new: true})
-    .then((fruit) => {
+    .then((passwords) => {
         // redirect user back to index
-        res.redirect("/keymaster")
+        res.redirect("/keymaster/edit/:id")
     })
      // error handling
      .catch((error) => {
@@ -108,11 +109,11 @@ router.put("/:id", (req, res) => {
 }
 )
 
-// destroy route - delete request - /fruits/:id
+// destroy route - delete request - /keymaster/:id
 router.delete("/:id", (req, res) => {
     // grab the id from params
     const id = req.params.id
-    // delete the fruit
+    // delete the login
     Passwords.findByIdAndRemove(id)
     .then((passwords) => {
         // redirect user back to index
@@ -124,16 +125,16 @@ router.delete("/:id", (req, res) => {
     })
 })
 
-// show route - get - /fruits/:id
+// show route - get - /keymaster/:id
 router.get("/:id", (req, res) => {
     // get the id from params
     const id = req.params.id
 
-    // get that particular fruit from the database
+    // get specific login from the database
     Passwords.findById(id)
     .then((passwords) => {
-        // render the show template with the fruit
-        res.render("keymaster/show.liquid", {paswords: keymaster})
+        // render the show template 
+        res.render("keymaster/show.liquid", {passwords: keymaster})
     })
     // error handling
     .catch((error) => {

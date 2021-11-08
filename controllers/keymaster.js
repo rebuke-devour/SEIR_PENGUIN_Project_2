@@ -3,6 +3,7 @@ const express = require('express')
 const Keymaster = require('../models/Passwords.js')
 const router = express.Router()
 
+
 // ============ M I D D L E W A R E ======== //
 // middleware to check if user is logged in
 router.use((req, res, next) => {
@@ -27,17 +28,16 @@ router.get("/", (req, res) => {
     })
 })
 
-// New Route
+// New Route - Renders page to create new password
 router.get("/new", (req, res) => {
     res.render("keymaster/new.liquid");
   });
 
-// Create route
-router.post("/", (req, res) => {
+// Create new password credential
+router.post("/new", (req, res) => {
   
   req.body.username = req.session.username
   req.body.saved = req.body.saved === "on" ? true : false
-
 
   Keymaster.create(req.body)
     .then((keymaster) => {
@@ -49,7 +49,7 @@ router.post("/", (req, res) => {
     });
 });
 
-// Edit Route
+// GET Route  -  Renders Edit Page
 router.get("/:id/edit", (req, res) => {
   const id = req.params.id;
 
@@ -69,7 +69,9 @@ router.put("/:id", (req, res) => {
 
   Keymaster.findByIdAndUpdate(id, req.body, { new: true })
     .then((keymaster) => {
-      res.redirect("/keymaster");
+        console.log(req.body)
+        // Keymaster.save(req.body)
+      res.redirect("/keymaster/");
     })
     .catch((error) => {
       console.log(error);
@@ -91,12 +93,15 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+
+
 // show route - get - /passwords/:id
 router.get("/:id", (req, res) => {
     const id = req.params.id;
   
     Keymaster.findById(id)
       .then((keymaster) => {
+          console.log(keymaster)
         res.render("keymaster/show.liquid", {passwords: keymaster});
       })
       .catch((error) => {

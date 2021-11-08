@@ -1,21 +1,21 @@
 {% layout "layout.liquid" %} {% block content %}
 <div>
-  <form action="/keymaster" method="post">
+  <form action="/keymaster/new" method="post">
     <fieldset>
       <legend>Enter your credentials</legend>
      
       <label>
-        Account Name:<input type="text" name="acctName" placeholder="" />
+        Account Name:<input type="text"value= '{{keymaster.acctName}}' name="acctName" placeholder="" />
       </label>
       <label>
-        User Name:<input type="text" name="userName" placeholder="username@service" />
+        User Name:<input type="text" name="userName" value = '{{keymaster.passwords}}' placeholder="username@service" />
       </label>
         <label>
-        Password:<input type="text" name="passwordKey" placeholder="Password" />
+        Password:<input type="text" name="passwordKey" value = '{{keymaster.passwords}}' placeholder="Password" />
       </label>
       <label> SAVE:<input type="checkbox" name="saved" /> </label>
     </fieldset>
-    <input type="submit" value="Save" />
+    <input type="submit" value="Save"/>
   </form>
 </div>
 {% endblock %}

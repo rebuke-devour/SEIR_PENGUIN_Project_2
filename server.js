@@ -28,36 +28,36 @@ const app = liquid(express(), {root: viewsFolder})
 // =============== Establish Connection ================ //
 
 const passwordsSeed = require('./models/seed.js');
-const router = require('./controllers/user.js')
+
 
 
 const mongoURI = process.env.DATABASE_URL;
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
-const DATABASE_URL = process.env.DATABASE_URL;
-const CONFIG = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
+// const DATABASE_URL = process.env.DATABASE_URL;
+// const CONFIG = {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// };
 
-// Connect to Mongo
-mongoose.connect(
-    mongoURI,
-    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
-    () => {
-      console.log("The connection with mongod is established");
-    }
-  );
+// // Connect to Mongo
+// mongoose.connect(
+//     mongoURI,
+//     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
+//     () => {
+//       console.log("The connection with mongod is established");
+//     }
+//   );
 
-mongoose.Promise = global.Promise;
-mongoose.connect ( mongoURI ,
-  () => console.log( 'Mongo running at' , mongoURI )
-);
+// mongoose.Promise = global.Promise;
+// mongoose.connect ( mongoURI ,
+//   () => console.log( 'Mongo running at' , mongoURI )
+// );
 
-mongoose.connection
-.on("open", () => console.log("Connected to Mongoose"))
-.on("close", () => console.log("Disconnected from Mongoose"))
-.on("error", (error) => console.log(error));
+// mongoose.connection
+// .on("open", () => console.log("Connected to Mongoose"))
+// .on("close", () => console.log("Disconnected from Mongoose"))
+// .on("error", (error) => console.log(error));
 
 //=================================//
 //seed route - seed our starter data
@@ -97,23 +97,20 @@ app.use(session({
 }))
 
 
-
 // ================ SEED DATA =================//
-router.get('/seed', (req,res)=> {
-Passwords.create(passwordsSeed, ( err , data ) => {
-  if ( err ) console.log ( err.message )
+// router.get('/seed', (req,res)=> {
+// Passwords.create(passwordsSeed, ( err , data ) => {
+//   if ( err ) console.log ( err.message )
   
-  })
-})
+//   })
+// })
 
 
-Passwords.create(passwordsSeed, ( err , data ) => {
-    if ( err ) console.log ( err.message )
-      console.log( data )
-    }
-);
-
-
+// Passwords.create(passwordsSeed, ( err , data ) => {
+//     if ( err ) console.log ( err.message )
+//       console.log( data )
+//     }
+// );
 
 ///////////////////////////////
 //       R O U T I N G     //
@@ -127,7 +124,6 @@ app.use('/keymaster',keyMasterRouter)
 
 // Introduce USER Router
 app.use('/user', userRouter)
-
 
 //Listener
 const PORT = process.env.PORT

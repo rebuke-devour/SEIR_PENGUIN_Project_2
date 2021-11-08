@@ -19,7 +19,7 @@ router.get("/Seed", (req, res) => {
     Passwords.deleteMany({}).then((data) => {
         // seed the starter 
         Passwords.create(startPasswords).then((data) => {
-            // send created passowrds back as JSON
+            // send created passwords back as JSON
             res.json(data)
         })
     })

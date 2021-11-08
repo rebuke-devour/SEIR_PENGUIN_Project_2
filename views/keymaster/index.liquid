@@ -4,6 +4,7 @@
 <div>
 <a href="/user/logout"><button>Logout</button></a>
  <a href="/keymaster/new"><button>Send </button></a>
+ <form action="/keymaster/edit/{{passwords.id}}?_method=PUT" method="POST"> 
             {% for passwords in keymaster %}
                  <article>
         

@@ -3,21 +3,23 @@
 
 <div>
       <legend>Edit your credentials{{ passwords.acctName }}</legend>
-    <form action="/keymaster/{{ passwords.id }}?_method=PUT" method="post"> 
+    <form action="/keymaster/{{ keymaster._id }}?_method=PUT" method="POST"> 
       <label>
       <label>
-        Account Name:<input type="text" name="acctName" placeholder="Your Account" />
+        Account Name:<input type="text" name="acctName" value= '{{keymaster.acctName}}' placeholder="Your Account" />
       </label>
       <label>
-        User Name:<input type="text" name="userName" placeholder="username@service" />
+        User Name:<input type="text" name="userName" value = '{{keymaster.userName}}' placeholder="username@service" />
       </label>
         <label>
-        Password:<input type="text" name="passwordKey" placeholder="Password" />
+        Password:<input type="text" name="passwordKey"value = '{{keymaster.passwordKey}}' placeholder="Password" />
       
     </fieldset>
       <input type="submit" value="Save" />
-       <a href="/keymaster/{{ passwords._id }}">
-     <input type="submit" value="update {{passwords.acctName}}"/>
+      </form>
+       {% comment %} <a href="/keymaster/{{ keymaster._id }}"> {% endcomment %}
+           {% comment %} <form action="/keymaster/:id{{ passwords.id }}?_method=PUT" method="PUT">  {% endcomment %}
+
 </div>
 
 
